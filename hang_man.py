@@ -1,8 +1,8 @@
 """
 Hangman game by Matthew Warren
 Created by following guide at: http://inventwithpython.com/chapter9.html
-Converted to Python 2.7 with a few cosmetic changes, extra animal names,
-and extra documentation/comments
+Converted to Python 2.7 with a few minor changes including: colors, cosmetic
+fixes, extra animal names, and extra documentation/comments.
 Last updated Oct 20, 2014
 """
 
@@ -71,14 +71,26 @@ def get_guess(already_guessed):
 	"""
 	while True: # continue until correct input received
 		print " Guess a letter."
-		guess = (str(raw_input("> "))).lower()
+		guess = (raw_input("> ")).lower()
 		
 		if len(guess) != 1: # check that it is a single character
-			print " Please enter a single letter."
+			display_board(hangman_pics, missed_letters, correct_letters, \
+			secret_word) # refreshing display here keeps graphic visible...
+			# display in red
+			print " %c[31mPlease enter a single letter." % chr(27),
+			# then reset color mode
+			print "%c[0m" % chr(27)
 		elif guess in already_guessed: # in missed_letters or correct_letters
-			print " You have already guessed that letter. Choose again."
+			display_board(hangman_pics, missed_letters, correct_letters, \
+			secret_word) # otherwise, repeatedly inputting wrong inputs...
+			print " %c[31mYou have already guessed that letter." % chr(27),
+			print "%c[31mChoose again." % chr(27),
+			print "%c[0m" % chr(27)
 		elif guess not in 'abcdefghijklmnopqrstuvwxyz':
-			print " Please enter a letter."
+			display_board(hangman_pics, missed_letters, correct_letters, \
+			secret_word) # will push it up off the screen
+			print " %c[31mPlease enter a letter." % chr(27), 
+			print "%c[0m" % chr(27)
 		else:
 			return guess
 
@@ -93,7 +105,7 @@ def play_again():
 	Returns: Boolean
 	"""
 	print " Do you want to play again? (yes or no)"
-	return (str(raw_input("> "))).lower().startswith('y')
+	return (raw_input("> ")).lower().startswith('y')
 
 
 ###############################################################################
@@ -208,8 +220,11 @@ while True:
 				found_all_letters = False
 				break;
 		if found_all_letters: 
-			print " That's right! The secret word was \"%s\"! You win!" % \
-			secret_word
+			display_board(hangman_pics, missed_letters, correct_letters, \
+			secret_word)
+			print " %c[32mThat's right!" % chr(27),
+			print "%c[32mThe secret word was \"%s\"!" % (chr(27), secret_word),
+			print "%c[32mYou win!%c[0m" % (chr(27), chr(27))
 			game_is_done = True
 	else:
 		missed_letters = missed_letters + guess
