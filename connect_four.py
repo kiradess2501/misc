@@ -177,7 +177,7 @@ def get_player_move():
 			else:
 				break
 	
-	# get index of where piece will end up if dropped there,	
+	# get index of where piece will end up if dropped there	
 	return is_space_open(board, int(column)) # then return index of move
 
 
@@ -211,10 +211,10 @@ def check_right(each, positions):
 		
 
 def check_up_right(each, positions):
-	# returns: Boolean
 	# check if position + 3 up and to its right make a win
 	# each -- int index of place we're checking
 	# positions -- list of places where a player's pieces are (ints)
+	# returns: Boolean
 	if (each + 8) in positions and (each + 16) in positions and \
 	(each + 24) in positions:
 		#print "won up and to the right of %d" % each # debug
@@ -224,10 +224,10 @@ def check_up_right(each, positions):
 		
 		
 def check_up_left(each, positions):
-	# returns: Boolean
 	# check if position + 3 up and to its left make a win
 	# each -- int index of place we're checking
 	# positions -- list of places where a player's pieces are (ints)
+	# returns: Boolean
 	if (each + 6) in positions and (each + 12) in positions and \
 	(each + 18) in positions:
 		#print "won up and to the left of %d" % each # debug
