@@ -1,4 +1,4 @@
 misc
 ====
 
-One-off programs made while following tutorials, books, etc.
+One-off programs made for practice or while following tutorials, books, etc.
